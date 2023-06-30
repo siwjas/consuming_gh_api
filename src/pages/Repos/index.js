@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
-import { 
-  FaArrowCircleLeft, 
+import { dateFormat } from "../components/dateFormat";
+import {
+  FaArrowCircleLeft,
   FaArrowCircleRight
 } from 'react-icons/fa';
 import { Wrapper } from "../wrapper";
@@ -34,10 +35,10 @@ function Repos() {
   const [issues, setIssues] = useState([])
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(1)
-  const [filters, setFilters] = useState([
-    {state: 'all', label: 'Todas', active: true},
-    {state: 'open', label: 'Abertas', active: false},
-    {state: 'closed', label: 'Fechadas', active: false}
+  const [filters] = useState([
+    { state: 'all', label: 'Todas', active: true },
+    { state: 'open', label: 'Abertas', active: false },
+    { state: 'closed', label: 'Fechadas', active: false }
   ])
   const [filterIndex, setFilterIndex] = useState(0)
 
@@ -69,6 +70,7 @@ function Repos() {
           page,
           per_page: 5
         },
+
       })
       setIssues(response.data)
     }
@@ -78,7 +80,7 @@ function Repos() {
   }, [filters, filterIndex, repoName, page])
 
   function handlePage(action) {
-    setPage(action === 'back'  ? page - 1 : page + 1)
+    setPage(action === 'back' ? page - 1 : page + 1)
   }
 
   if (loading) {
@@ -101,12 +103,12 @@ function Repos() {
             <BackButton to={'..'}>
               <FaArrowCircleLeft size={28} />
             </BackButton>
-          <Filters active={filterIndex}>
+            <Filters active={filterIndex}>
               {
                 filters.map((filter, i) => (
-                  <button 
+                  <button
                     type="button"
-                    key={ i }
+                    key={i}
                     onClick={() => handleFilter(i)}
                   >
                     {filter.label}
@@ -128,52 +130,51 @@ function Repos() {
           </Owner>
 
           <IssuesBody>
-            {
-              issues.length === 0 ?
-                <SubTitle style={{ color: '#06d6a0' }}>
-                  Nenhuma Issue encontrada nesse Repositório!
-                </SubTitle> :
-                <IssuesList>
-                  {
-                    issues.map(issue => (
-                      <li key={issue.id}>
-                        <User>
-                          <img
-                            src={issue.user.avatar_url}
-                            alt={issue.user.login}
-                          />
-                          <Text><strong>{issue.user.login}</strong></Text>
-                        </User>
+            {issues.length === 0 ?
+              <SubTitle style={{ color: '#06d6a0' }}>
+                Tudo resolvido por aqui ;-)!
+              </SubTitle> :
+              <IssuesList>
+                {
+                  issues.map(issue => (
+                    <li key={issue.id}>
+                      <User>
+                        <img
+                          src={issue.user.avatar_url}
+                          alt={issue.user.login}
+                        />
+                        <Text><strong>{issue.user.login}</strong></Text>
+                      </User>
 
-                        <IssueDetail>
-                          <Small>
-                            <span>
-                              criato em: {issue.created_at}
-                            </span>
-                          </Small>
+                      <IssueDetail>
+                        <Small>
+                          <span>
+                            criato em: {dateFormat(issue.created_at, 'full')}
+                          </span>
+                        </Small>
 
-                          <a
-                            href={issue.html_url}
-                            rel="noreferrer"
-                            target="_blank"
-                          >
-                            {issue.title}
-                          </a>
+                        <a
+                          href={issue.html_url}
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          {issue.title}
+                        </a>
 
-                          {issue.labels.length > 0
-                            ? <Text>labels:
-                              {issue.labels.map(label => (
-                                <Labels key={label.id} className="labels"> {label.name} </Labels>
-                              ))}
-                            </Text>
-                            : null
-                          }
+                        {issue.labels.length > 0
+                          ? <Text>labels:
+                            {issue.labels.map(label => (
+                              <Labels key={label.id} className="labels"> {label.name} </Labels>
+                            ))}
+                          </Text>
+                          : null
+                        }
 
-                        </IssueDetail>
-                      </li>
-                    ))
-                  }
-                </IssuesList>
+                      </IssueDetail>
+                    </li>
+                  ))
+                }
+              </IssuesList>
             }
           </IssuesBody>
 
@@ -193,9 +194,11 @@ function Repos() {
             <button
               type="button"
               onClick={() => handlePage('next')}
+              disabled={issues.length === 0}
             >
               <FaArrowCircleRight />
             </button>
+
           </IssuesFooter>
         </Content>
       </Container>
