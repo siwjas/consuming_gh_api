@@ -97,7 +97,7 @@ function Main() {
       <Wrapper>
         <Container>
           <Title>
-            <FaGithub size={32} />My favorite Repos
+            <FaGithub size={32} />My favorite GitHub Repos
           </Title>
 
           <Form onSubmit={handleSubmit} error={newAlert}>

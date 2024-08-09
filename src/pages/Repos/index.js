@@ -132,7 +132,7 @@ function Repos() {
           <IssuesBody>
             {issues.length === 0 ?
               <SubTitle style={{ color: '#06d6a0' }}>
-                Tudo resolvido por aqui ;-)!
+                Tudo resolvido por aqui!!
               </SubTitle> :
               <IssuesList>
                 {
