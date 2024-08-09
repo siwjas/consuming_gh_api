@@ -13,7 +13,7 @@ export const Loading = styled.div`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: .3rem;
   justify-content: center;
   width: 860px;  
 `;
@@ -47,7 +47,7 @@ export const Header = styled.div`
   justify-content: space-between;
   min-width: 100%;
   background-color: #00afb9;
-  box-shadow: 0 0 7px rgba(0, 0, 0, .3);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, .3);
   padding: .5rem;
   height: 3rem;
 `;
@@ -89,8 +89,7 @@ export const SubTitle = styled.h3`
 export const Owner = styled.div`
   display: flex;
   flex-direction: column;
-  gap: .5rem;
-  padding-bottom: 1rem;
+  padding-bottom: .5rem;
   align-items: center;
   min-width: 100%;  
   border-bottom: 2px solid #3d405b;
@@ -98,7 +97,7 @@ export const Owner = styled.div`
   img {
     border: solid 2px #00afb9;
     border-radius: 1.2rem;
-    width: 124px;
+    width: 80px;
     box-shadow: 0 0 5px rgba(0, 0, 0, .3);
     padding: .3rem;
   }
@@ -113,6 +112,7 @@ export const IssuesList = styled.ul`
 
   img {
     width: 46px;
+    border: 1px solid #c0c0c0;
     border-radius: 50%;
     box-shadow: 0 0 5px rgba(0, 0, 0, .3);
   }
@@ -121,8 +121,8 @@ export const IssuesList = styled.ul`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: .5rem 0;
-    gap: 1rem;
+    padding: .2rem 0;
+    gap: .5rem;
 
     & + li {
       border-top: 1px dashed #3d405b;
